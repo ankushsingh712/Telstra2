@@ -1,3 +1,6 @@
+/**
+ * This is Search item page java package
+ */
 package com.crm.qa.pages;
 
 import java.util.Set;
@@ -11,41 +14,57 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.crm.qa.base.TestBase;
 import com.crm.qa.util.TestUtil;
-
+/**
+ * 
+ * @author Ankush Singh Bhadouria
+ *
+ */
 public class SearchItemPage extends TestBase {
 
+	//Page Factory - OR: 
 	@FindBy(xpath = "//input[@name='q']")
 	WebElement searchInput;
 	
 	@FindBy(xpath = "//*[@class='col col-6-12']/button")
 	WebElement btnAddToCart;
 	
+	@FindBy (xpath="//nav[@class='_1ypTlJ']/descendant::a[2]")
+	WebElement productName;
+	
+	
 	// Initiating test data object
 	Object[][] searchData=TestUtil.getTestData("Item");
+	
+	//Initiating explicit Wait 
 	WebDriverWait wait = new WebDriverWait(driver,15);
-	
-	
+		
 	// Initializing the Page Objects:
 	public SearchItemPage() {
 		PageFactory.initElements(driver, this);
 	}
 	
-	
+	/**
+	 * Return true if item is displayed on page
+	 * @return
+	 */
 	public boolean verifyContactsLabel(){
 		
 		return searchInput.isDisplayed();
 	}
 	
+	/**
+	 * Search product
+	 */
 	public void searchProduct()
 	{
 		searchData=TestUtil.getTestData("Item");
 		System.out.println("data "+searchData[0][0].toString());
 		System.out.println("data "+searchData[0][1].toString());
-		//WebElement searchinputbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='q']]")));
+		
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		searchInput.sendKeys(searchData[0][0].toString());
@@ -54,16 +73,16 @@ public class SearchItemPage extends TestBase {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		WebElement productName = driver.findElement(By.xpath("//div[contains(text(),'"+searchData[0][1].toString()+"')]"));
 		 
-		// WebElement productName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+searchData[0][1].toString()+"')]")));
+		
 		 if (!productName.isDisplayed())
 		 {
-			driver.findElement(By.xpath("//nav[@class='_1ypTlJ']/descendant::a[2]")).click();
-			 // nav[@class='_1ypTlJ']/descendant::a[2]
+			 productName.click();
+			 
 		 }else
 		 {productName.click();}
 		 // Switch window 
@@ -85,6 +104,11 @@ public class SearchItemPage extends TestBase {
 		  driver.switchTo().defaultContent(); 
 	}
 	
+	
+	/**
+	 * Return true if product is added to cart
+	 * @return boolean status 
+	 */
 	public boolean verify_productaddedToCart()
 	{
 		boolean blnStatus=false;
@@ -98,7 +122,7 @@ public class SearchItemPage extends TestBase {
 			blnStatus=true;
 		}else
 		{
-			System.out.println("add to cart "+blnStatus);
+			System.out.println("cpuld not add to cart "+blnStatus);
 			blnStatus=false;
 		}
 		return blnStatus;

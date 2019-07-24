@@ -1,24 +1,26 @@
+/**
+ * This is base class package
+ */
 package com.crm.qa.base;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.crm.qa.util.TestUtil;
 import com.crm.qa.util.WebEventListener;
-
+/**
+ * 
+ * @author Ankush Singh Bhadouria
+ *
+ */
 public class TestBase {
 	
 	public static WebDriver driver;
@@ -26,6 +28,9 @@ public class TestBase {
 	public  static EventFiringWebDriver e_driver;
 	public static WebEventListener eventListener;
 	static TestUtil TestUtilObj= new TestUtil();
+	/**
+	 * This is base class constructor to initiate the configuration property file.
+	 */
 	public TestBase(){
 		try {
 			prop = new Properties();
@@ -39,7 +44,9 @@ public class TestBase {
 		}
 	}
 	
-	
+	/**
+	 * This method is responsible to initiate web driver
+	 */
 	public static void initialization(){
 		String browserName = prop.getProperty("browser");
 		
@@ -57,7 +64,7 @@ public class TestBase {
 		// Now create object of EventListerHandler to register it with EventFiringWebDriver
 		eventListener = new WebEventListener();
 		e_driver.register(eventListener);
-	//	driver = e_driver;
+	  //	driver = e_driver; **not using event listener because it is producing  lots of logs
 		
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -67,17 +74,7 @@ public class TestBase {
 		
 	}
 	
-	public static void logout()
-	{
-		// Clicking on logout
-				 WebElement usermenu = driver.findElement(By.xpath("//div[contains(text(),'Ankush')]"));
-				 Actions action = new Actions(driver);
-				 action.moveToElement(usermenu).clickAndHold().build().perform();
-				// TestUtilObj.highLight(driver,usermenu);
-				// driver.findElement(By.xpath("//div[contains(text(),'Ankush')]")).click();
-				 driver.findElement(By.xpath("//a[@href='#']")).click(); 
-	}
-	
+		
 	
 	
 	
