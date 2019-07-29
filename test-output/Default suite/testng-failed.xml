@@ -6,9 +6,8 @@
       <class name="com.crm.qa.testcases.SearchIteamTest">
         <methods>
           <include name="setUp"/>
-          <include name="Testcase2_verify_productaddedToCart"/>
+          <include name="Testcase4_searchProduct"/>
           <include name="tearDown"/>
-          <include name="Testcase1_searchProduct"/>
         </methods>
       </class> <!-- com.crm.qa.testcases.SearchIteamTest -->
     </classes>

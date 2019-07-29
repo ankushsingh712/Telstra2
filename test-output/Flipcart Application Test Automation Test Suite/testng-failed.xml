@@ -6,13 +6,13 @@
   </listeners>
   <test name="Flipcart Test App Test Cases(failed)">
     <classes>
-      <class name="com.crm.qa.testcases.SearchIteamTest">
+      <class name="com.crm.qa.testcases.LoginPageTest">
         <methods>
           <include name="setUp"/>
-          <include name="Testcase5_verify_productaddedToCart"/>
+          <include name="Testcase1_loginPageTitleTest"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- com.crm.qa.testcases.SearchIteamTest -->
+      </class> <!-- com.crm.qa.testcases.LoginPageTest -->
     </classes>
   </test> <!-- Flipcart Test App Test Cases(failed) -->
 </suite> <!-- Failed suite [Flipcart Application Test Automation Test Suite] -->
