@@ -55,7 +55,7 @@ public class SearchItemPage extends TestBase {
 	/**
 	 * Search product
 	 */
-	public void searchProduct()
+	public String searchProduct()
 	{
 		searchData=TestUtil.getTestData("Item");
 		System.out.println("data "+searchData[0][0].toString());
@@ -88,20 +88,20 @@ public class SearchItemPage extends TestBase {
 		 // Switch window 
 		  Set<String> winHandles = driver.getWindowHandles();
 		  System.out.println("windowcount:"+winHandles.size());
+		  
 		  for(String handle: winHandles){
-	        
-			  if (driver.getTitle().contains(searchData[0][1].toString()))
+			  driver.switchTo().window(handle);
+			
+			  if (!driver.getTitle().contains("Products") && driver.getTitle().contains(searchData[0][1].toString()))
 			  {
-				  System.out.println("Title of the new window: " +  driver.getTitle()); 
-				  break;
+				  System.out.println("Title of the new window: " +  driver.getTitle());
+				 break;
 			  }
-	          driver.switchTo().window(handle);
-	          
 	      }
 		 
-		  btnAddToCart.click();
-		
-		  driver.switchTo().defaultContent(); 
+		 btnAddToCart.click();
+		 return driver.getTitle();
+		 
 	}
 	
 	

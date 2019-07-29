@@ -8,6 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
+
 import com.crm.qa.base.TestBase;
 import com.crm.qa.pages.LogoutPage;
 import com.crm.qa.pages.SearchItemPage;
@@ -52,7 +54,20 @@ public class SearchIteamTest extends TestBase {
 	 * Test case 1 to search product page
 	 */	@Test(priority = 1)
 	public void Testcase4_searchProduct() {
-		searchitemPage.searchProduct();
+		// Initiating test data object
+		String productSearch=null;
+		 Object[][] searchData=TestUtil.getTestData("Item");
+		System.out.println("Iteam:-"+searchData[0][1]);
+		productSearch= searchitemPage.searchProduct();
+		
+		
+		if(productSearch.contains(searchData[0][1].toString()))
+		{
+			Assert.assertTrue(true, "Product successfully found");
+		}else{
+			Assert.assertTrue(false,"Product searched is not corrent ");
+		}
+		System.out.println("Iteam page title"+productSearch);
 	}
 	 /**
 		 * Test case 2 to validate if product has been added to cart
@@ -75,7 +90,7 @@ public class SearchIteamTest extends TestBase {
 	@AfterClass
 	public void tearDown() {
 		logout.logout();
-		driver.quit();
+		//driver.quit();
 	}
 
 }

@@ -17,13 +17,14 @@ import com.crm.qa.base.TestBase;
 public class LogoutPage extends TestBase {
 	
 	//Page Factory - OR:
-		@FindBy(xpath="//div[contains(text(),'Ankush')]")
+		@FindBy(xpath="//*[contains(text(),'Ankush')]")
 		WebElement usermenu;
 		
 		@FindBy(xpath="//a[@href='#']")
 		WebElement logOutMenuOption;
 		
-
+	public	@FindBy(xpath="//*[contains(text(),'Login & Signup')]")
+        WebElement LogoutPageElement;
 		
 		
 		
@@ -32,10 +33,7 @@ public class LogoutPage extends TestBase {
 			PageFactory.initElements(driver, this);
 		}
 		
-		//Assertions
-		public String validateLoginPageTitle(){
-			return driver.getTitle();
-		}
+		
 		
 		/**
 		 * Logout method 
@@ -54,4 +52,6 @@ public class LogoutPage extends TestBase {
 		public String validateLogoutPageTitle(){
 			return driver.getTitle();
 		}
+		
+		
 }
